@@ -11,20 +11,20 @@ class TapItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColor.pBarcolor, width: 2),
+          borderRadius: BorderRadius.circular(10),
+          color: isCleated ? AppColor.pBarcolor : Colors.transparent),
       child: Text(
         source.name ?? "",
         textAlign: TextAlign.center,
         style: GoogleFonts.exo(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
             color: isCleated ? Colors.black : Colors.white),
       ),
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-      decoration: BoxDecoration(
-          border: Border.all(color: AppColor.pBarcolor, width: 2),
-          borderRadius: BorderRadius.circular(20),
-          color: isCleated ? AppColor.pBarcolor : Colors.transparent),
     );
   }
 }

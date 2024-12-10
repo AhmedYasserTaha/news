@@ -15,19 +15,20 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.pBarcolor,
         title: Text(
-          "Sport",
+          "News",
           style: GoogleFonts.exo(
               color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.search,
-                size: 30,
-                color: Colors.white,
-              ))
+            onPressed: () {},
+            icon: Icon(
+              Icons.search,
+              size: 30,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
       body: FutureBuilder<SoursResponse>(
@@ -45,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: AppColor.pBarcolor,
               ),
@@ -63,13 +64,6 @@ class HomeScreen extends StatelessWidget {
             );
           }
           var sourceList = snapshot.data?.sources ?? [];
-          // return ListView.builder(
-          //   itemBuilder: (context, index) => Text(
-          //     sourceList[index].name ?? "",
-          //     style: GoogleFonts.exo(color: Colors.white, fontSize: 18),
-          //   ),
-          //   itemCount: sourceList.length,
-          // );
 
           return TapContainer(sourcesList: sourceList);
         },
