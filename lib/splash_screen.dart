@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/category/category_fragment.dart';
 import 'package:news_app/home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushAndRemoveUntil(
         (MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => CategoryFragment(),
         )),
         (route) {
           return false;

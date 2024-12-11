@@ -6,8 +6,8 @@ import 'package:news_app/model/sources_response.dart';
 import 'package:news_app/utils/app_color.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+  const HomeScreen({super.key, required this.categoryId});
+  final String categoryId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder<SoursResponse>(
-        future: Api.getSours(),
+        future: Api.getSours(categoryId),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(

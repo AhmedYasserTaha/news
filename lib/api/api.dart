@@ -6,13 +6,17 @@ import 'package:news_app/model/sources_response.dart';
 //https://newsapi.org/v2/top-headlines/sources?apiKey=bf880877d9804fd89dcb2b1f5028cfcb
 class Api {
   static String baseUrl = "newsapi.org";
-  static Future<SoursResponse> getSours() async {
+  static Future<SoursResponse> getSours(String categoryId) async {
     Uri url = Uri.https(baseUrl, "/v2/top-headlines/sources",
-        {"apiKey": "bf880877d9804fd89dcb2b1f5028cfcb"});
-    var response = await http.get(url);
-    var bodyString = response.body;
-    var json = jsonDecode(bodyString);
-    return SoursResponse.fromJson(json);
+        {"apiKey": "bf880877d9804fd89dcb2b1f5028cfcb", "category": categoryId});
+    try {
+      var response = await http.get(url);
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      return SoursResponse.fromJson(json);
+    } catch (e) {
+      throw e;
+    }
   }
 
   //https://newsapi.org/v2/everything?q=bitcoin&apiKey=bf880877d9804fd89dcb2b1f5028cfcb&sources=bbc-sport

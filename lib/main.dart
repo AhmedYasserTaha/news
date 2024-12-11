@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/category/category_fragment.dart';
 import 'package:news_app/splash_screen.dart';
 
 void main() async {
@@ -10,9 +11,9 @@ class News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: CategoryFragment(),
     );
   }
 }
