@@ -28,7 +28,7 @@ class _CategoryFragmentState extends State<CategoryFragment> {
       appBar: AppBar(
         backgroundColor: AppColor.pBarcolor,
         title: Text(
-          "NEWS APP",
+          "Category",
           style: GoogleFonts.exo(
               color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
         ),
@@ -59,8 +59,10 @@ class _CategoryFragmentState extends State<CategoryFragment> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              HomeScreen(categoryId: categoryList![index].id!),
+                          builder: (context) => HomeScreen(
+                            categoryId: categoryList![index].id!,
+                            title: categoryList![index].title!,
+                          ),
                         ),
                       );
                     },

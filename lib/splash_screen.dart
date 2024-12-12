@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/category/category_fragment.dart';
-import 'package:news_app/home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

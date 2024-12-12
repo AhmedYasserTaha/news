@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/model/sources_response.dart';
 import 'package:news_app/utils/app_color.dart';
 
+// ignore: must_be_immutable
 class TapItem extends StatelessWidget {
   TapItem({super.key, required this.source, required this.isCleated});
   Sources source;

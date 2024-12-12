@@ -83,7 +83,7 @@ class _TapContainerState extends State<TapContainer> {
                 child: ListView.builder(
                   itemCount: articleList.length,
                   itemBuilder: (context, index) =>
-                      _imageNetworkWidget(article: articleList[index]),
+                      imageNetworkWidget(article: articleList[index]),
                 ),
               );
             },
@@ -94,8 +94,8 @@ class _TapContainerState extends State<TapContainer> {
   }
 }
 
-class _imageNetworkWidget extends StatelessWidget {
-  const _imageNetworkWidget({
+class imageNetworkWidget extends StatelessWidget {
+  const imageNetworkWidget({
     super.key,
     required this.article,
   });

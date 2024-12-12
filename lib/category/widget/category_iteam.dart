@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/model/category_model.dart';
-import 'package:news_app/utils/app_color.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.category, required this.index});

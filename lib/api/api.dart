@@ -31,4 +31,15 @@ class Api {
     var json = jsonDecode(bodyString);
     return ArticlesResponse.fromJson(json);
   }
+
+  static Future<ArticlesResponse> getSearchNewsArticle(String q) async {
+    Uri url = Uri.https(baseUrl, "/v2/everything", {
+      "apiKey": "bf880877d9804fd89dcb2b1f5028cfcb",
+      "q": q,
+    });
+    var response = await http.get(url);
+    var bodyString = response.body;
+    var json = jsonDecode(bodyString);
+    return ArticlesResponse.fromJson(json);
+  }
 }

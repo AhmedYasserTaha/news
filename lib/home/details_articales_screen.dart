@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/home/web_view_screen.dart';
 import 'package:news_app/model/articlas_response.dart';
 import 'package:news_app/utils/app_color.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -17,7 +18,7 @@ class DetailsArticlesScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white, size: 30),
         backgroundColor: AppColor.pBarcolor,
         title: Text(
-          article.source?.name ?? "ABC News",
+          article.source?.name ?? "Category",
           style: GoogleFonts.exo(
               color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -92,7 +93,16 @@ class DetailsArticlesScreen extends StatelessWidget {
       ),
       floatingActionButton: MaterialButton(
         color: AppColor.pBarcolor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => WebViewScreen(
+                url: article.url ??
+                    "https://abcnews.go.com/Business/bitcoin-races-past-100000-dollars-fueled-post-election-rally/story?id=116127616",
+              ),
+            ),
+          );
+        },
         child: Text(
           "View Full Article",
           style: GoogleFonts.exo(color: Colors.white, fontSize: 18),
