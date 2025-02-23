@@ -11,20 +11,27 @@ class WebViewScreen extends StatefulWidget {
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
-  var controller = WebViewController();
+  late final WebViewController controller;
+
   @override
   void initState() {
     super.initState();
-    controller.loadRequest(Uri.parse(widget.url));
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(widget.url));
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColor.pDcolor,
-        body: WebViewWidget(controller: controller),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.pBarcolor,
+        title: const Text("Web View", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      backgroundColor: AppColor.pDcolor,
+      body: WebViewWidget(controller: controller),
     );
   }
 }

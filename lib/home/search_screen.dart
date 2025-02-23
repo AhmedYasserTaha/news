@@ -10,60 +10,60 @@ class Search extends SearchDelegate {
   @override
   TextStyle? get searchFieldStyle =>
       const TextStyle(color: Colors.white, fontSize: 16);
+
   @override
   ThemeData appBarTheme(BuildContext context) {
-    // TODO: implement appBarTheme
     return ThemeData(
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.white)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.white)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.white)),
-        ),
-        scaffoldBackgroundColor: AppColor.pDcolor,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColor.pBarcolor,
-        ));
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.white)),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.white)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.white)),
+      ),
+      scaffoldBackgroundColor: AppColor.pDcolor,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColor.pBarcolor,
+      ),
+    );
   }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
     return [
       IconButton(
-          onPressed: () {
-            showResults(context);
-          },
-          icon: const Icon(
-            Icons.search,
-            size: 30,
-            color: Colors.white,
-          ))
+        onPressed: () {
+          showResults(context);
+        },
+        icon: const Icon(
+          Icons.search,
+          size: 30,
+          color: Colors.white,
+        ),
+      )
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
     return IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: const Icon(
-          Icons.close,
-          size: 30,
-          color: Color.fromARGB(255, 255, 255, 255),
-        ));
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      icon: const Icon(
+        Icons.close,
+        size: 30,
+        color: Colors.white,
+      ),
+    );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
     return FutureBuilder<ArticlesResponse>(
       future: Api.getSearchNewsArticle(query),
       builder: (context, snapshot) {
@@ -96,9 +96,12 @@ class Search extends SearchDelegate {
             ),
           );
         }
+
         var articleList = snapshot.data?.articles ?? [];
-        return Expanded(
+
+        return SizedBox.expand(
           child: ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             itemCount: articleList.length,
             itemBuilder: (context, index) =>
                 imageNetworkWidget(article: articleList[index]),
@@ -110,7 +113,6 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
     return Container();
   }
 }

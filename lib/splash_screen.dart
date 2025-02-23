@@ -14,25 +14,20 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushAndRemoveUntil(
-        (MaterialPageRoute(
-          builder: (context) => CategoryFragment(),
-        )),
-        (route) {
-          return false;
-        },
+        MaterialPageRoute(builder: (context) => CategoryFragment()),
+        (route) => false,
       );
-      // ignore: use_build_context_synchronously
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset(
-        "assets/images/splash.png",
-        height: double.infinity,
-        width: double.infinity,
-        fit: BoxFit.fill,
+      body: SizedBox.expand(
+        child: Image.asset(
+          "assets/images/splash.png",
+          fit: BoxFit.fill, // استخدم cover لضبط الصورة بدون تشويه
+        ),
       ),
     );
   }

@@ -12,6 +12,8 @@ class DetailsArticlesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size; // الحصول على حجم الشاشة
+
     return Scaffold(
       backgroundColor: AppColor.pDcolor,
       appBar: AppBar(
@@ -20,92 +22,102 @@ class DetailsArticlesScreen extends StatelessWidget {
         title: Text(
           article.source?.name ?? "Category",
           style: GoogleFonts.exo(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: double.infinity,
-              clipBehavior: Clip.antiAlias,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: CachedNetworkImage(
-                fit: BoxFit.fill,
-                imageUrl: article.urlToImage ?? "",
-                placeholder: (context, url) => const SizedBox(
-                  height: 100,
+      body: LayoutBuilder(
+        // يساعد في ضبط العناصر على جميع الشاشات
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
                   width: double.infinity,
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                  height: size.height *
+                      0.4, // تحديد ارتفاع الصورة بناءً على حجم الشاشة
+                  clipBehavior: Clip.antiAlias,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover, // ضبط الصورة لتتناسب مع الأبعاد
+                    imageUrl: article.urlToImage ?? "",
+                    placeholder: (context, url) => SizedBox(
+                      height: size.height * 0.3,
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.replay_circle_filled_outlined,
-                  size: 50,
-                  color: Colors.white,
+                const SizedBox(height: 20),
+                Text(
+                  article.title ?? "No Title Available",
+                  style: GoogleFonts.exo(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              article.title ?? "Loading...,",
-              style: GoogleFonts.exo(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 255, 255, 255)),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              article.description ?? "Loading...,",
-              style: GoogleFonts.exo(fontSize: 18, color: Colors.white),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              article.content ?? "Loading...,",
-              style: GoogleFonts.exo(fontSize: 16, color: Colors.white),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              article.publishedAt != null
-                  ? timeago.format(DateTime.parse(article.publishedAt!))
-                  : "Loading...",
-              style: GoogleFonts.exo(fontSize: 16, color: Colors.white),
-              textAlign: TextAlign.end,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: MaterialButton(
-        color: AppColor.pBarcolor,
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => WebViewScreen(
-                url: article.url ??
-                    "https://abcnews.go.com/Business/bitcoin-races-past-100000-dollars-fueled-post-election-rally/story?id=116127616",
-              ),
+                const SizedBox(height: 15),
+                Text(
+                  article.description ?? "No description available",
+                  style: GoogleFonts.exo(fontSize: 18, color: Colors.white),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  article.content ?? "No content available",
+                  style: GoogleFonts.exo(fontSize: 16, color: Colors.white),
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  article.publishedAt != null
+                      ? timeago.format(DateTime.parse(article.publishedAt!))
+                      : "No Date Available",
+                  style: GoogleFonts.exo(fontSize: 16, color: Colors.grey[300]),
+                  textAlign: TextAlign.end,
+                ),
+                const SizedBox(height: 30),
+              ],
             ),
           );
         },
-        child: Text(
-          "View Full Article",
-          style: GoogleFonts.exo(color: Colors.white, fontSize: 18),
+      ),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomLeft, // تحريك الزر إلى الجهة اليسرى
+        child: Padding(
+          padding: const EdgeInsets.only(
+              bottom: 16, left: 16), // إزاحة من الأسفل واليسار
+          child: FloatingActionButton.extended(
+            backgroundColor: AppColor.pBarcolor,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => WebViewScreen(
+                    url: article.url ??
+                        "https://abcnews.go.com/Business/bitcoin-races-past-100000-dollars-fueled-post-election-rally/story?id=116127616",
+                  ),
+                ),
+              );
+            },
+            label: Text(
+              "View Full Article",
+              style: GoogleFonts.exo(color: Colors.white, fontSize: 14),
+            ),
+            icon: const Icon(Icons.open_in_browser,
+                color: Colors.white, size: 20),
+          ),
         ),
       ),
     );
